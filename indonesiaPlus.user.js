@@ -63,5 +63,5 @@ GM_addStyle ( `
 waitForKeyElements(".mapster_el.clickmap", changeMap);
 function changeMap() {
   var map = document.querySelector(".mapster_el.clickmap");
-  map.src = "https://www.yzemaze.de/bgg/indonesia_map_slothNinja.png";
+  map.src = "https://github.com/yzemaze/IndonesiaPlus/raw/master/indonesia_map_slothNinja.png";
 };
