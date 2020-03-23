@@ -5,7 +5,7 @@ Change Indonesia map and player colors on SlothNinja.com
 1. Install Violentmonkey, Tampermonkey or GreaseMonkey
 2. Open https://github.com/yzemaze/IndonesiaPlus/raw/master/indonesiaPlus.user.js
 3. Confirm installation
-(4. Change background color in line 23 to one you like)
+4. Change background color in line 23 – if you like
 
 # More?
 - Change player colors: edit CSS in ll. 30-59 (IndonesiaPlus.user.js)
