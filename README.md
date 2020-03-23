@@ -1,2 +1,2 @@
 # IndonesiaPlus
-enhance your Indonesia experience on SlothNinja.com
+Change Indonesia map and player colors on SlothNinja.com
