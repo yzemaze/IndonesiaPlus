@@ -50,3 +50,8 @@ function changeMap() {
   var map = document.querySelector(".mapster_el.clickmap");
   map.src = "https://github.com/yzemaze/IndonesiaPlus/raw/master/indonesia_map_slothNinja.png";
 };
+
+// marker of city size 3: replace red ovals by blue (i.e. indigo) ovals
+var oldSrc = '/images/indonesia/red-oval.png';
+var newSrc = 'https://github.com/tobetobi/IndonesiaPlus/blob/master/indigo-oval.png';
+$('img[src="' + oldSrc + '"]').attr('src', newSrc);
