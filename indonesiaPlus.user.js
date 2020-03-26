@@ -29,7 +29,7 @@ GM_addStyle ( `
 GM_addStyle ( `
   :root {
     /* player colors */
-    --black: #808080;
+    --black: #000000;
     --green: #02be02;
     --orange: #ff7f00;
     --purple: #c800c8;
