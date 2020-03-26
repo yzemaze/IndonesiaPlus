@@ -9,7 +9,7 @@
 // @namespace   https://github.com/yzemaze/IndonesiaPlus
 // @match       https://www.slothninja.com/indonesia/game/show/*
 // @grant       GM_addStyle
-// @version     2.1
+// @version     2.2
 // @author      yzemaze
 // @require     https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js
 // @require     https://gist.github.com/raw/2625891/waitForKeyElements.js
@@ -17,17 +17,11 @@
 // ==/UserScript==
 "use strict";
 
-// map background color
 GM_addStyle ( `
-  img.mapster_el.clickmap {
-    background-color: #93bcc4; /* blue */
-    /*background-color: #d2bfae;*/ /* sand */
-  }
-` );
-
-// player colors to match r&d table
-GM_addStyle ( `
+  /* color variables – change #...... to colors you like */
   :root {
+    /* map background */
+    --mapBg: #93bcc4; /* blue */
     /* player colors */
     --black: #000000;
     --green: #02be02;
@@ -38,6 +32,12 @@ GM_addStyle ( `
     --level1: #02be02; /* green */
     --level2: #ffff00; /* yellow */
     --level3: #b40000; /* red */
+  }
+  /* stop here if you don’t know what you’re doing ;) */
+
+  /* map background color */
+  img.mapster_el.clickmap {
+    background-color: var(--mapBg);
   }
 
   /* players */
