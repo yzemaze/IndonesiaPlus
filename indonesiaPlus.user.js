@@ -42,6 +42,38 @@ GM_addStyle ( `
   #board img.ship.white-border, #board img.goods.white-border, .white-border, body.indonesia #lower-content .left-column #gamelog .content .gamelog-entry.white, body.indonesia #lower-content .right-column #chatbox .content .messagelog-entry.white {
     border-color: #ffffff;
   }
+
+  #board img.city {
+    width: 10px;
+  }
+      
+  img[src*="https://github.com/tobetobi/IndonesiaPlus/raw/master/transparent1.png"] {          
+      
+      background-color: LightGray;
+      border: 2px solid black; 
+      border-radius: 50%;
+      margin: 0 5px auto;
+      width: 10px; height:20px;
+  }
+
+  img[src*="https://github.com/tobetobi/IndonesiaPlus/raw/master/transparent2.png"] {          
+      
+      background-color: Gray;
+      border: 2px solid black; 
+      border-radius: 50%;
+      margin: 0 5px auto;
+      width: 10px; height:20px;
+  }
+
+  img[src*="https://github.com/tobetobi/IndonesiaPlus/raw/master/transparent3.png"] {          
+      
+      background-color: black;
+      border: 2px solid lightgrey; 
+      border-radius: 50%;
+      margin: 0 5px auto;
+      width: 10px; height:20px;
+  }
+
 ` );
 
 // map resource
@@ -51,7 +83,16 @@ function changeMap() {
   map.src = "https://github.com/yzemaze/IndonesiaPlus/raw/master/indonesia_map_slothNinja.png";
 };
 
-// marker of city size 3: replace red ovals by blue (i.e. indigo) ovals
-var oldSrc = '/images/indonesia/red-oval.png';
-var newSrc = 'https://github.com/tobetobi/IndonesiaPlus/raw/master/indigo-oval.png';
-$('img[src="' + oldSrc + '"]').attr('src', newSrc);
+
+// replace ovals by transparent graphs (that will be filled via css)
+var redSrc = '/images/indonesia/red-oval.png';
+var yellowSrc = '/images/indonesia/yellow-oval.png';
+var greenSrc = '/images/indonesia/green-oval.png';
+var new1Src = 'https://github.com/tobetobi/IndonesiaPlus/raw/master/transparent3.png';
+var new2Src = 'https://github.com/tobetobi/IndonesiaPlus/raw/master/transparent2.png';
+var new3Src = 'https://github.com/tobetobi/IndonesiaPlus/raw/master/transparent1.png';
+$('img[src="' + redSrc + '"]').attr('src', new1Src);
+$('img[src="' + yellowSrc + '"]').attr('src', new2Src);
+$('img[src="' + greenSrc + '"]').attr('src', new3Src);
+
+
