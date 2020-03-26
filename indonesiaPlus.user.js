@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        IndonesiaPlus
-// @description	change Indonesia map and player colors on SlothNinja.com
+// @description change Indonesia map and player colors on SlothNinja.com
 // @license     GPL-3.0-or-later; https://www.gnu.org/licenses/gpl-3.0.txt
 // @homepageURL https://github.com/yzemaze/IndonesiaPlus
 // @supportURL  https://github.com/yzemaze/IndonesiaPlus/issues
@@ -9,7 +9,7 @@
 // @namespace   https://github.com/yzemaze/IndonesiaPlus
 // @match       https://www.slothninja.com/indonesia/game/show/*
 // @grant       GM_addStyle
-// @version     2.0
+// @version     2.1
 // @author      yzemaze
 // @require     https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js
 // @require     https://gist.github.com/raw/2625891/waitForKeyElements.js
@@ -108,19 +108,22 @@ GM_addStyle ( `
   }
 
   /* cities */
-  #board img.city {
+  #board img.city, #city-stones img {
     border: 2px solid #000000;
     border-radius: 50%;
     height: 16px;
     width: 12px;
   }
-  #board img.city[level="1"] {
+  #city-stones img {
+    margin-left: 0.3em;
+  }
+  img[level="1"] {
     background-color: var(--level1);
   }
-  #board img.city[level="2"] {
+  img[level="2"] {
     background-color: var(--level2);
   }
-  #board img.city[level="3"] {
+  img[level="3"] {
     background-color: var(--level3);
   }
 
