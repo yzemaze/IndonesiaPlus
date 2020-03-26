@@ -9,7 +9,7 @@
 // @namespace   https://github.com/yzemaze/IndonesiaPlus
 // @match       https://www.slothninja.com/indonesia/game/show/*
 // @grant       GM_addStyle
-// @version     1.6
+// @version     2.0
 // @author      yzemaze
 // @require     https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js
 // @require     https://gist.github.com/raw/2625891/waitForKeyElements.js
@@ -25,28 +25,141 @@ GM_addStyle ( `
   }
 ` );
 
-// player colors to fit r&d table
+// player colors to match r&d table
 GM_addStyle ( `
-  #board img.ship.black-border, #board img.goods.black-border, .black-border, body.indonesia #lower-content .left-column #gamelog .content .gamelog-entry.black, body.indonesia #lower-content .right-column #chatbox .content .messagelog-entry.black {
-    border-color: #808080;
+  :root {
+    /* player colors */
+    --black: #808080;
+    --green: #02be02;
+    --orange: #ff7f00;
+    --purple: #c800c8;
+    --white: #ffffff;
+    /* city colors */
+    --level1: #02be02; /* green */
+    --level2: #ffff00; /* yellow */
+    --level3: #b40000; /* red */
   }
-  #board img.ship.green-border, #board img.goods.green-border, .green-border, body.indonesia #lower-content .left-column #gamelog .content .gamelog-entry.green, body.indonesia #lower-content .right-column #chatbox .content .messagelog-entry.green {
-    border-color: #02be02;
+
+  /* players */
+  .black-border,
+  #board[data-zoom="zoom-all"] img.ship.black-border,
+  #board[data-zoom="zoom-all"] img.goods.black-border,
+  body.indonesia #lower-content .left-column #gamelog .content .gamelog-entry.black,
+  body.indonesia #lower-content .right-column #chatbox .content .messagelog-entry.black {
+    border-color: var(--black);
   }
-  #board img.ship.orange-border, #board img.goods.orange-border, .orange-border, body.indonesia #lower-content .left-column #gamelog .content .gamelog-entry.orange, body.indonesia #lower-content .right-column #chatbox .content .messagelog-entry.orange {
-    border-color: #ff7f00
+  .green-border,
+  #board[data-zoom="zoom-all"] img.ship.green-border,
+  #board[data-zoom="zoom-all"] img.goods.green-border,
+  body.indonesia #lower-content .left-column #gamelog .content .gamelog-entry.green,
+  body.indonesia #lower-content .right-column #chatbox .content .messagelog-entry.green {
+    border-color: var(--green);
   }
-  #board img.ship.purple-border, #board img.goods.purple-border, .purple-border, body.indonesia #lower-content .left-column #gamelog .content .gamelog-entry.purple, body.indonesia #lower-content .right-column #chatbox .content .messagelog-entry.purple {
-    border-color: #c800c8;
+  .orange-border,
+  #board[data-zoom="zoom-all"] img.ship.orange-border,
+  #board[data-zoom="zoom-all"] img.goods.orange-border,
+  body.indonesia #lower-content .left-column #gamelog .content .gamelog-entry.orange,
+  body.indonesia #lower-content .right-column #chatbox .content .messagelog-entry.orange {
+    border-color: var(--orange);
   }
-  #board img.ship.white-border, #board img.goods.white-border, .white-border, body.indonesia #lower-content .left-column #gamelog .content .gamelog-entry.white, body.indonesia #lower-content .right-column #chatbox .content .messagelog-entry.white {
-    border-color: #ffffff;
+  .purple-border,
+  #board[data-zoom="zoom-all"] img.ship.purple-border,
+  #board[data-zoom="zoom-all"] img.goods.purple-border,
+  body.indonesia #lower-content .left-column #gamelog .content .gamelog-entry.purple,
+  body.indonesia #lower-content .right-column #chatbox .content .messagelog-entry.purple {
+    border-color: var(--purple);
   }
+  .white-border,
+  #board[data-zoom="zoom-all"] img.ship.white-border,
+  #board[data-zoom="zoom-all"] img.goods.white-border,
+  body.indonesia #lower-content .left-column #gamelog .content .gamelog-entry.white,
+  body.indonesia #lower-content .right-column #chatbox .content .messagelog-entry.white {
+    border-color: var(--white);
+  }
+
+  /* turn order + r&d table */
+  #board #turn-track img {
+    border: 2px solid #000000;
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+  }
+  #board #tech-track img:not(.ship) {
+    border: 2px solid #000000;
+    border-radius: 50%;
+    height: 10px;
+    width: 10px;
+  }
+  
+  #board img[pcol="black"] {
+    background-color: var(--black);
+  }
+  #board img[pcol="green"] {
+    background-color: var(--green);
+  }
+  #board img[pcol="orange"] {
+    background-color: var(--orange);
+  }
+  #board img[pcol="purple"] {
+    background-color: var(--purple);
+  }
+  #board img[pcol="white"] {
+    background-color: var(--white);
+  }
+
+  /* cities */
+  #board img.city {
+    border: 2px solid #000000;
+    border-radius: 50%;
+    height: 16px;
+    width: 12px;
+  }
+  #board img.city[level="1"] {
+    background-color: var(--level1);
+  }
+  #board img.city[level="2"] {
+    background-color: var(--level2);
+  }
+  #board img.city[level="3"] {
+    background-color: var(--level3);
+  }
+
 ` );
 
 // map resource
 waitForKeyElements(".mapster_el.clickmap", changeMap);
 function changeMap() {
   var map = document.querySelector(".mapster_el.clickmap");
-  map.src = "https://github.com/yzemaze/IndonesiaPlus/raw/master/indonesia_map_slothNinja.png";
+  map.src = "https://github.com/yzemaze/IndonesiaPlus/raw/master/img/indonesia_map_slothNinja_tiny.png";
 };
+
+// replace cities and turn order / r&d tokens
+var transparent = "https://github.com/yzemaze/IndonesiaPlus/raw/master/img/transparent.png";
+
+// turn order + r&d table
+var blackDisc = "/images/indonesia/black-disc.png";
+var whiteDisc = "/images/indonesia/white-disc.png";
+var greenDisc = "/images/indonesia/green-disc.png";
+var purpleDisc = "/images/indonesia/purple-disc.png";
+var orangeDisc = "/images/indonesia/orange-disc.png";
+$('img[src="' + blackDisc + '"]').attr('pcol', 'black');
+$('img[src="' + blackDisc + '"]').attr('src', transparent);
+$('img[src="' + greenDisc + '"]').attr('pcol', 'green');
+$('img[src="' + greenDisc + '"]').attr('src', transparent);
+$('img[src="' + orangeDisc + '"]').attr('pcol', 'orange');
+$('img[src="' + orangeDisc + '"]').attr('src', transparent);
+$('img[src="' + purpleDisc + '"]').attr('pcol', 'purple');
+$('img[src="' + purpleDisc + '"]').attr('src', transparent);
+$('img[src="' + whiteDisc + '"]').attr('pcol', 'white');
+$('img[src="' + whiteDisc + '"]').attr('src', transparent);
+
+// cities
+var greenOval = "/images/indonesia/green-oval.png";
+var yellowOval = "/images/indonesia/yellow-oval.png";
+var redOval = "/images/indonesia/red-oval.png";
+$('img[src="' + greenOval + '"]').attr('level', '1');
+$('img[src="' + greenOval + '"]').attr('src', transparent);
+$('img[src="' + yellowOval + '"]').attr('level', '2');
+$('img[src="' + yellowOval + '"]').attr('src', transparent);
+$('img[src="' + redOval + '"]').attr('level', '3');
+$('img[src="' + redOval + '"]').attr('src', transparent);
