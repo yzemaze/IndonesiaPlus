@@ -9,7 +9,7 @@
 // @namespace   https://github.com/yzemaze/IndonesiaPlus
 // @match       https://www.slothninja.com/indonesia/game/show/*
 // @grant       GM_addStyle
-// @version     3.2
+// @version     3.3
 // @author      yzemaze
 // @require     https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js
 // @require     https://gist.github.com/raw/2625891/waitForKeyElements.js
@@ -136,21 +136,21 @@ GM_addStyle ( `
 // map source
 waitForKeyElements(".mapster_el.clickmap", changeMap);
 function changeMap() {
-  var map = document.querySelector(".mapster_el.clickmap");
+  const map = document.querySelector(".mapster_el.clickmap");
   map.src = "https://github.com/yzemaze/IndonesiaPlus/raw/master/img/indonesia_map_slothNinja_tiny.png";
 };
 
 // replace turn order, r&d and city tokens
-var transparent = "https://github.com/yzemaze/IndonesiaPlus/raw/master/img/transparent.png";
+const transparent = "https://github.com/yzemaze/IndonesiaPlus/raw/master/img/transparent.png";
 // turn order + r&d table
-var pColors = ["black", "white", "green", "purple", "orange"];
+const pColors = ["black", "white", "green", "purple", "orange"];
 var pImgs = [];
 // fill array with img paths
 for (let i=0; i < pColors.length; i++) {
   pImgs[i] = '/images/indonesia/' + pColors[i] + '-disc.png';
 };
 // cities
-var cColors = ["green", "yellow", "red"];
+const cColors = ["green", "yellow", "red"];
 var cImgs = [];
 // fill array with img paths
 for (let i=0; i < cColors.length; i++) {
