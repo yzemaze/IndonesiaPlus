@@ -9,7 +9,7 @@
 // @namespace   https://github.com/yzemaze/IndonesiaPlus
 // @match       https://www.slothninja.com/indonesia/game/show/*
 // @grant       GM_addStyle
-// @version     3.0
+// @version     3.1
 // @author      yzemaze
 // @require     https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js
 // @require     https://gist.github.com/raw/2625891/waitForKeyElements.js
@@ -77,14 +77,15 @@ GM_addStyle ( `
     border-color: var(--white);
   }
 
-  /* turn order + r&d table */
-  #board #turn-track img {
+  /* turn order, hull player dialog */
+  #board #turn-track img, .icon img {
     border: 2px solid #000000;
     border-radius: 50%;
     box-shadow: 1px 2px black;
     height: 20px;
     width: 20px;
   }
+  /* r&d table */
   #board #tech-track img:not(.ship) {
     border: 1px solid #000000;
     border-radius: 50%;
@@ -92,20 +93,20 @@ GM_addStyle ( `
     height: 10px;
     width: 10px;
   }
-  
-  #board img[pcol="black"] {
+  /* turn order, r&d table, hull player dialog */
+  img[pColor="black"] {
     background-color: var(--black);
   }
-  #board img[pcol="green"] {
+  img[pColor="green"] {
     background-color: var(--green);
   }
-  #board img[pcol="orange"] {
+  img[pColor="orange"] {
     background-color: var(--orange);
   }
-  #board img[pcol="purple"] {
+  img[pColor="purple"] {
     background-color: var(--purple);
   }
-  #board img[pcol="white"] {
+  img[pColor="white"] {
     background-color: var(--white);
   }
 
@@ -161,7 +162,7 @@ $(document).ready(function() {
     // turn order + r&d table
     for (let i=0; i < pColors.length; i++) {
       // add attribute to address img with CSS
-      $('img[src="' + pImgs[i] + '"]').attr('pcol', pColors[i]);
+      $('img[src="' + pImgs[i] + '"]').attr('pColor', pColors[i]);
       // replace img with transparent img to let CSS do the magic
       $('img[src="' + pImgs[i] + '"]').attr('src', transparent);
     };
@@ -173,9 +174,9 @@ $(document).ready(function() {
       $('img[src="' + cImgs[i] + '"]').attr('src', transparent);
     };
   }
-                  
-  // replace imgs after each (partial) move
-  $(document).change(replaceImgs);
-  // run at least once
-  replaceImgs();
+  // replace imgs after each (partial) move (dom-tree modification)
+  const observer = new MutationObserver(replaceImgs);
+  const targetNode = document.getElementById('container');
+  const config = {attributes: true, childList: true, subtree: true};
+  observer.observe(targetNode, config);
 });
