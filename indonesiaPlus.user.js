@@ -9,7 +9,7 @@
 // @namespace   https://github.com/yzemaze/IndonesiaPlus
 // @match       https://www.slothninja.com/indonesia/game/show/*
 // @grant       GM_addStyle
-// @version     3.1
+// @version     3.2
 // @author      yzemaze
 // @require     https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js
 // @require     https://gist.github.com/raw/2625891/waitForKeyElements.js
@@ -31,7 +31,7 @@ GM_addStyle ( `
     /* city colors */
     --level1: #02be02; /* green */
     --level2: #ffff00; /* yellow */
-    --level3: #0033dd; /*#b40000; red */
+    --level3: #b40000; /* red - #0033dd blue */
   /* stop here if you don’t know what you’re doing ;) */
   }
 
