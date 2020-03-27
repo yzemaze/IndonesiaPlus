@@ -9,7 +9,7 @@
 // @namespace   https://github.com/yzemaze/IndonesiaPlus
 // @match       https://www.slothninja.com/indonesia/game/show/*
 // @grant       GM_addStyle
-// @version     2.2
+// @version     3.0
 // @author      yzemaze
 // @require     https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js
 // @require     https://gist.github.com/raw/2625891/waitForKeyElements.js
@@ -18,22 +18,22 @@
 "use strict";
 
 GM_addStyle ( `
-  /* color variables – change #...... to colors you like */
   :root {
+  /* color variables – change #...... to colors you like */
     /* map background */
     --mapBg: #93bcc4; /* blue */
     /* player colors */
-    --black: #000000;
+    --black: #555555;
     --green: #02be02;
     --orange: #ff7f00;
     --purple: #c800c8;
-    --white: #ffffff;
+    --white: #fff;
     /* city colors */
     --level1: #02be02; /* green */
     --level2: #ffff00; /* yellow */
-    --level3: #b40000; /* red */
-  }
+    --level3: #0033dd; /*#b40000; red */
   /* stop here if you don’t know what you’re doing ;) */
+  }
 
   /* map background color */
   img.mapster_el.clickmap {
@@ -81,12 +81,14 @@ GM_addStyle ( `
   #board #turn-track img {
     border: 2px solid #000000;
     border-radius: 50%;
+    box-shadow: 1px 2px black;
     height: 20px;
     width: 20px;
   }
   #board #tech-track img:not(.ship) {
-    border: 2px solid #000000;
+    border: 1px solid #000000;
     border-radius: 50%;
+    box-shadow: 1px 2px black;
     height: 10px;
     width: 10px;
   }
@@ -111,6 +113,7 @@ GM_addStyle ( `
   #board img.city, #city-stones img {
     border: 2px solid #000000;
     border-radius: 50%;
+    box-shadow: 1px 2px black;
     height: 16px;
     width: 12px;
   }
@@ -129,40 +132,50 @@ GM_addStyle ( `
 
 ` );
 
-// map resource
+// map source
 waitForKeyElements(".mapster_el.clickmap", changeMap);
 function changeMap() {
   var map = document.querySelector(".mapster_el.clickmap");
   map.src = "https://github.com/yzemaze/IndonesiaPlus/raw/master/img/indonesia_map_slothNinja_tiny.png";
 };
 
-// replace cities and turn order / r&d tokens
+// replace turn order, r&d and city tokens
 var transparent = "https://github.com/yzemaze/IndonesiaPlus/raw/master/img/transparent.png";
-
 // turn order + r&d table
-var blackDisc = "/images/indonesia/black-disc.png";
-var whiteDisc = "/images/indonesia/white-disc.png";
-var greenDisc = "/images/indonesia/green-disc.png";
-var purpleDisc = "/images/indonesia/purple-disc.png";
-var orangeDisc = "/images/indonesia/orange-disc.png";
-$('img[src="' + blackDisc + '"]').attr('pcol', 'black');
-$('img[src="' + blackDisc + '"]').attr('src', transparent);
-$('img[src="' + greenDisc + '"]').attr('pcol', 'green');
-$('img[src="' + greenDisc + '"]').attr('src', transparent);
-$('img[src="' + orangeDisc + '"]').attr('pcol', 'orange');
-$('img[src="' + orangeDisc + '"]').attr('src', transparent);
-$('img[src="' + purpleDisc + '"]').attr('pcol', 'purple');
-$('img[src="' + purpleDisc + '"]').attr('src', transparent);
-$('img[src="' + whiteDisc + '"]').attr('pcol', 'white');
-$('img[src="' + whiteDisc + '"]').attr('src', transparent);
-
+var pColors = ["black", "white", "green", "purple", "orange"];
+var pImgs = [];
+// fill array with img paths
+for (let i=0; i < pColors.length; i++) {
+  pImgs[i] = '/images/indonesia/' + pColors[i] + '-disc.png';
+};
 // cities
-var greenOval = "/images/indonesia/green-oval.png";
-var yellowOval = "/images/indonesia/yellow-oval.png";
-var redOval = "/images/indonesia/red-oval.png";
-$('img[src="' + greenOval + '"]').attr('level', '1');
-$('img[src="' + greenOval + '"]').attr('src', transparent);
-$('img[src="' + yellowOval + '"]').attr('level', '2');
-$('img[src="' + yellowOval + '"]').attr('src', transparent);
-$('img[src="' + redOval + '"]').attr('level', '3');
-$('img[src="' + redOval + '"]').attr('src', transparent);
+var cColors = ["green", "yellow", "red"];
+var cImgs = [];
+// fill array with img paths
+for (let i=0; i < cColors.length; i++) {
+  cImgs[i] = '/images/indonesia/' + cColors[i] + '-oval.png';
+};
+
+$(document).ready(function() {
+  function replaceImgs(){
+    // turn order + r&d table
+    for (let i=0; i < pColors.length; i++) {
+      // add attribute to address img with CSS
+      $('img[src="' + pImgs[i] + '"]').attr('pcol', pColors[i]);
+      // replace img with transparent img to let CSS do the magic
+      $('img[src="' + pImgs[i] + '"]').attr('src', transparent);
+    };
+    // cities
+    for (let i=0; i < cColors.length; i++) {
+      // add attribute to address img with CSS
+      $('img[src="' + cImgs[i] + '"]').attr('level', i+1);
+      // replace img with transparent img to let CSS do the magic
+      $('img[src="' + cImgs[i] + '"]').attr('src', transparent);
+    };
+  }
+                  
+  // replace imgs after each (partial) move
+  $(document).change(replaceImgs);
+  // run at least once
+  replaceImgs();
+});
