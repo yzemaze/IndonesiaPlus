@@ -9,7 +9,7 @@
 // @namespace   https://github.com/yzemaze/IndonesiaPlus
 // @match       https://www.slothninja.com/indonesia/game/show/*
 // @grant       GM_addStyle
-// @version     3.3
+// @version     3.4
 // @author      yzemaze
 // @require     https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js
 // @require     https://gist.github.com/raw/2625891/waitForKeyElements.js
@@ -85,6 +85,11 @@ GM_addStyle ( `
     height: 20px;
     width: 20px;
   }
+  #board.zoom-left #turn-track img, #board.zoom-center #turn-track img, #board.zoom-right #turn-track img {
+    box-shadow: 2px 3px black;
+    height: 40px;
+    width: 40px;
+  }
   /* r&d table */
   #board #tech-track img:not(.ship) {
     border: 1px solid #000000;
@@ -92,6 +97,11 @@ GM_addStyle ( `
     box-shadow: 1px 2px black;
     height: 10px;
     width: 10px;
+  }
+  #board.zoom-left #tech-track img:not(.ship), #board.zoom-center #tech-track img:not(.ship), #board.zoom-right #tech-track img:not(.ship) {
+    box-shadow: 2px 3px black;
+    height: 20px;
+    width: 20px;
   }
   /* turn order, r&d table, hull player dialog */
   img[pColor="black"] {
@@ -117,6 +127,11 @@ GM_addStyle ( `
     box-shadow: 1px 2px black;
     height: 16px;
     width: 12px;
+  }
+  #board.zoom-left img.city, #board.zoom-center img.city, #board.zoom-right img.city {
+    box-shadow: 2px 3px black;
+    height: 40px;
+    width: 30px;
   }
   #city-stones img {
     margin-left: 0.3em;
