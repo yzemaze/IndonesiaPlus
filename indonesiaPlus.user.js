@@ -9,7 +9,7 @@
 // @namespace   https://github.com/yzemaze/IndonesiaPlus
 // @match       https://www.slothninja.com/indonesia/game/show/*
 // @grant       GM_addStyle
-// @version     3.4
+// @version     3.5
 // @author      yzemaze
 // @require     https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js
 // @require     https://gist.github.com/raw/2625891/waitForKeyElements.js
@@ -171,6 +171,16 @@ var cImgs = [];
 for (let i=0; i < cColors.length; i++) {
   cImgs[i] = '/images/indonesia/' + cColors[i] + '-oval.png';
 };
+// display max demand next to city stones
+let cityStones = document.querySelectorAll("#city-stones .pull-left.left-padding");
+let cL1 = cityStones[0].innerText;
+let cL2 = cityStones[1].innerText;
+let cL3 = cityStones[2].innerText;
+let demand = 12-cL1 + (8-cL2)*2 + (3-cL3)*3;
+let cSLastEl = document.querySelector("#city-stones .pull-left:last-child");
+let cSDemandEl = document.querySelector("#city-stones .pull-left.left-padding").cloneNode(true);
+cSDemandEl.innerText = "Demand: " + demand;
+cSLastEl.insertAdjacentElement("afterend", cSDemandEl);
 
 $(document).ready(function() {
   function replaceImgs(){
