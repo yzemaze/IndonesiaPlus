@@ -1,0 +1,141 @@
+/* ==UserStyle==
+@name           slothNinjaCSS
+@description    several UI improvements especially for HD-displays and Indonesia
+@namespace      github.com/yzemaze/IndonesiaPlus/
+@homepageURL    https://github.com/yzemaze/IndonesiaPlus/
+@supportURL     https://github.com/yzemaze/IndonesiaPlus/issues/
+@version        0.2.0
+@author         yzemaze
+@license        GPLv3
+@preprocessor   stylus
+==/UserStyle== */
+
+@-moz-document domain("slothninja.com")
+    body
+        padding 0.5em
+        &.indonesia, &.two-col, &.tammany
+            #container
+                margin 0 auto
+                //max-width 1920px
+                width 100%
+            #header
+                width calc(100% - 3px)
+                #banner-logo
+                    min-width 150px
+                    width 20%
+                    .left
+                        height 100%
+                        width 100%
+                        .logo
+                            margin 0
+                #banner-line
+                    width 80%
+                    .left
+                        float right
+                        text-align right
+                        width 20%
+                    .center
+                        float left
+                        text-align left
+                        width 65%
+                    .right
+                        float right
+                        padding-right 10px
+            #main-content
+                width calc(100% - 3px)
+            #footer
+                width calc(100% - 3px)
+        &.two-col
+            #left-sidebar
+                min-width 190px
+                width calc(15%)
+            #main-content
+                min-width 990px
+                width calc(85% - 15px)
+                .game-table, .heading, .content-box
+                    width 100%
+                .game-table .content-box .content
+                    height 100%
+                #DataTables_Table_0
+                    width 100% !important
+                
+    /* Indonesia */
+    body.indonesia
+        #header
+            width 1190px
+        #container
+            #upper-content
+                width 1190px
+                //width calc(100% - 2px)
+                #status-box
+                    width 100%
+                    .left-stats
+                        min-width 230px
+                        width 20%
+                        .content
+                            height 100%
+                            padding-left 0.5em
+                        .current-players
+                            height 1em !important /* c-inline */
+                        #city-stones
+                            height 4em !important /* c-inline */
+                            margin-top 0.5em
+                    .center-stats
+                        min-width 710px
+                        width 55%
+                        .content
+                            height 100%
+                            .center-box .content #flash-box > div
+                                height 100%
+                                min-height 9em
+                    .right-stats
+                        float right
+                        max-width 300px
+                        min-width 210px
+                        width 15%
+                        .content
+                            height 100%
+                            padding-right 0.5em
+                            /* 2 column layout */
+                            div:nth-child(-n+3)
+                                float left
+                                text-align left
+                                width 60%
+            /* map */
+            .content-box:nth-child(1)
+                width 1190px
+            /* players table */
+            .content-box:nth-child(2)
+                max-width 1190px
+            #players-table
+                padding 0
+                td
+                    vertical-align top
+                    &.last-action
+                        min-width 240px
+                    &.city-cards
+                        text-align left
+                    &.slot
+                        text-align left
+                        img.deed
+                            height 70px
+                            width 70px
+                .Expansions
+                    white-space nowrap
+                .top-padding
+                    margin-top 0.2em
+            @media (min-width: 1920px)
+                .content-box:nth-child(1)
+                    float left
+                .content-box:nth-child(2)
+                    float right
+                    width calc(100% - 1210px)
+                    #players-table
+                        position absolute
+                        left 1205px
+                        top 6px
+                #lower-content
+                    position absolute
+                    bottom 0px
+                #footer
+                    display none
