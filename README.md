@@ -20,5 +20,10 @@ Change map features
 - upload
 - change map.src accordingly
 
+# HD-Display and sick of scrolling?
+1. Install Stylus
+2. Open https://github.com/yzemaze/IndonesiaPlus/raw/master/slothNinja.user.styl
+3. Confirm installation
+
 # Anything else?
 Open an issue or pull request :)
