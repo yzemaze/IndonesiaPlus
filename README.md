@@ -27,3 +27,9 @@ Change map features
 
 # Anything else?
 Open an issue or pull request :)
+
+# Sources
+The map is based on the work of Alexandre Freitas, wiyum and pchekov.
+https://boardgamegeek.com/image/453124/indonesia
+https://boardgamegeek.com/filepage/129460/indonesia-revised-map-v17
+https://boardgamegeek.com/filepage/174618/indonesia-revised-vector-map-v22
