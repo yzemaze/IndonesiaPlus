@@ -1,5 +1,6 @@
 # IndonesiaPlus
-Change Indonesia map, player and city colors on SlothNinja.com. Screenshot: https://github.com/yzemaze/IndonesiaPlus/blob/master/img/screenshotIndonesiaPlus5p.png
+Change Indonesia map, player and city colors on SlothNinja.com:
+![Screenshot of IndonesiaPlus in action](https://github.com/yzemaze/IndonesiaPlus/blob/master/img/screenshotIndonesiaPlus5p.png)
 
 # How to
 1. Install Violentmonkey, Tampermonkey or GreaseMonkey
